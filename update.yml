@@ -1,15 +1,19 @@
 ---
-- hosts: Debian
+- hosts: 192.168.3.100, 192.168.3.101
+  become: yes
+  tasks:
+
+  - name: update
+    apt:
+      update_cache: yes
+      upgrade: full
+           
+- hosts: 192.168.3.102
   become: yes
   tasks:
 
   - name: update
     shell: sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y autoremove && sudo apt-get -y autoclean
-
-#    apt module didn't work at raspberrypi-1
-#    apt:
-#      update_cache: yes
-#      upgrade: full
 
     register: return_from_update
     failed_when: return_from_update.rc not in [0, 1]
