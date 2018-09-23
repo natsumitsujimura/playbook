@@ -1,0 +1,18 @@
+#usage: ansible-playbook update.yml --ask-sudo-pass
+---
+- hosts: Debian
+  sudo: yes
+  tasks:
+
+  - name: update
+    shell: sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y autoremove && sudo apt-get -y autoclean
+    register: return_from_update
+    failed_when: return_from_update.rc not in [0, 1]
+    changed_when: no
+
+  - name: show previous shell stdout
+    debug:
+      msg: "{{ return_from_update.stdout}}"
+  - name: show previous shell stderr
+    debug:
+      msg: "{{ return_from_update.stderr}}"
