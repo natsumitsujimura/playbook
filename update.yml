@@ -1,4 +1,3 @@
-#usage: ansible-playbook update.yml --ask-sudo-pass
 ---
 - hosts: Debian
   become: yes
