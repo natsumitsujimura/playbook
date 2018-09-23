@@ -1,6 +1,6 @@
 #usage: ansible-playbook update.yml --ask-sudo-pass
 ---
-- hosts: 192.168.3.101
+- hosts: Debian
   become: yes
   tasks:
 
